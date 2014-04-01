@@ -29,8 +29,8 @@ void matMult_opt(int N, const double *matA, const double *matB, double *matC)
 
     int i,j,k;
     int row_offset_C = 0;
-    int indexA = 0;
-    int indexB = 0;
+    int indexA = 0; // matA index
+    int indexB = 0; // matB index
 
     //for (i = 0; i < N*N; i++)
     //    matC[i] = 0;
@@ -39,15 +39,11 @@ void matMult_opt(int N, const double *matA, const double *matB, double *matC)
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             for (k = 0; k < N; k++) {
-                //matC[k + row_offset_C] += matA[indexA] * matB[k + row_offset_B];
                 matC[k + row_offset_C] += matA[indexA] * matB[indexB];
                 //matC[k+i*N] += matA[j+i*N] * matB[k+j*N];
                 indexB += 1;
-            }
-            
+            }            
             indexA += 1;
-            //indexB -= N;
-            //row_offset_B += N;
         }
         indexB = 0;
         row_offset_C += N;

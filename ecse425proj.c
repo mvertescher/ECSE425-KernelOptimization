@@ -60,10 +60,11 @@ void matMult(int N, const double *matA, const double *matB, double *matC)
             // For each column 
             for (col = 0; col < N; col++) {
                 sum = 0;
-                offsetA = N * row; 
-                offsetB = col; 
+                offsetA = N * row; // Offset for A is the current row
+                offsetB = col; // Offset for B is the current col
+                // Sum vector A times vector B
                 for (i = 0; i < N; i++) {
-                    sum += matA[offsetA+i] * matB[offsetB+i*N];
+                    sum += matA[offsetA + i] * matB[offsetB + i * N];
                 }
                 matC[offsetA+col] = sum;
             }
