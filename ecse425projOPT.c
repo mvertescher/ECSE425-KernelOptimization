@@ -32,10 +32,6 @@ void matMult_opt(int N, const double *matA, const double *matB, double *matC)
     int indexA = 0; // matA index
     int indexB = 0; // matB index
 
-    //for (i = 0; i < N*N; i++)
-    //    matC[i] = 0;
-    
-
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             for (k = 0; k < N; k++) {
@@ -49,7 +45,7 @@ void matMult_opt(int N, const double *matA, const double *matB, double *matC)
         row_offset_C += N;
     }
         
-    /* 
+    /* Old matMult_opt
     // Assume square matrix A of NxN and square matrix B of NxN
     int row, col, offsetA, offsetB, i, rowB;
     double sum;

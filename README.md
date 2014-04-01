@@ -17,5 +17,12 @@ Copy data:
 sudo scp -r ECSE425-KernelOptimization matthew.vertescher@tr5130gu-2:~/
 
 
-Remove all files 
+Remove all cachegrind output files:
 rm -R cachegrind*
+
+Processor info:
+cat /proc/cpuinfo
+
+
+Reference cache arch:
+valgrind --tool=cachegrind --I1=32768,8,64 --D1=32768,8,64 --LL=6291456,24,64 ./ecse425proj -N 1000 -operation 1
