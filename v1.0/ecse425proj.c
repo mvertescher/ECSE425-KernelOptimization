@@ -49,15 +49,13 @@ void matMult(int N, const double *matA, const double *matB, double *matC)
 {
     if(dlayout == RowMaj)
     {
-        // Naive implementation 
+        // Code in your naive implementation here
 
         // Assume square matrix A of NxN and square matrix B of NxN
         int row,col,offsetA,offsetB,i;
         double sum;
 
-        // For each row
         for (row = 0; row < N; row++) {
-            // For each column 
             for (col = 0; col < N; col++) {
                 sum = 0;
                 offsetA = N * row; 
@@ -68,6 +66,7 @@ void matMult(int N, const double *matA, const double *matB, double *matC)
                 matC[offsetA+col] = sum;
             }
         }
+
     }
 
 }
@@ -76,24 +75,41 @@ void matVecMult(int N, const double *matA, const double *vecB, double *vecC)
 {
     if(dlayout == RowMaj)
     {
-        // Naive implementation 
-
-        //vecC = matA x vecB        
+        // Code in your naive implementation here
+        //vecC = matA x vecB
         
         // Assume square matrix of NxN and vector of Nx1
         int row,col,row_offset;
         double row_sum;
-        
-        // For each row of the output vector 
         for (row = 0; row < N; row++) {
-            row_sum = 0;    // The output element
-            row_offset = N * row;   // The row offset 
-            // Take the sum of the products of the row of matrix A and vector B
-            for (col = 0; col < N; col++) 
+            row_sum = 0; 
+            row_offset = N * row;
+            for (col = 0; col < N; col++) {
                 row_sum += matA[col+row_offset] * vecB[col];
+            }  
             vecC[row] = row_sum;
         }
+
     }
+}
+
+void verifyMatMult(int N, const double *matA, const double *matB, const double *matC)
+{
+    double *ref;
+    ref = (double *) malloc(N*N * sizeof(double));
+    matMult(N,matA,matB,ref); // Use TA's reference implementation
+    compareVecs(N,matC,ref);
+    free(ref);
+}
+
+void verifyMatVecMult(int N, const double *matA, const double *vecB, const double *vecC)
+{
+
+    double *ref;
+    ref = (double *) malloc(N * sizeof(double));
+    matVecMult(N,matA,vecB,ref); // Use TA's reference implementation
+    compareVecs(N,vecC,ref);
+    free(ref);
 }
 
 double compareVecs(int N, const double *src, const double *ref)
