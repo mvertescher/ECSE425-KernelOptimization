@@ -123,7 +123,7 @@ int main(int argc, const char *argv[])
     {
         case 0: /* Matrix-matrix multiply */
             {
-                printf("Performing matrix-matrix multiply operation\n");
+                //printf("Performing matrix-matrix multiply operation\n");
                 double *matA, *matB, *matC1, *matC2;
 
                 // Allocate memory
@@ -137,7 +137,7 @@ int main(int argc, const char *argv[])
                 randInitialize(N*N,matB);
 
                 clock_t tic, toc;
-                double tm;
+                double tm, tn, to;
 
                 if(execNaive) {
                   // Perform naive matA x matB = matC1
@@ -145,7 +145,8 @@ int main(int argc, const char *argv[])
                   matMult(N,matA,matB,matC1);
                   toc = clock();
                   tm = (double)(toc - tic) / CLOCKS_PER_SEC;
-                  printf("Elapsed time for naive mat-mat mult.: %f seconds\n",tm);
+                  //printf("Elapsed time for naive mat-mat mult.: %f seconds\n",tm);
+                  tn = tm;
                 }
 
                 if(execOPT) {
@@ -154,8 +155,11 @@ int main(int argc, const char *argv[])
                   matMult_opt(N,matA,matB,matC2);
                   toc = clock();
                   tm = (double)(toc - tic) / CLOCKS_PER_SEC;
-                  printf("Elapsed time for optimized mat-mat mult.: %f seconds\n",tm);
+                  //printf("Elapsed time for optimized mat-mat mult.: %f seconds\n",tm);
+                  to = tm;
                 }
+
+                printf("%i %f %f \n",N,tn,to);
 
                 // Verify results (compare the two matrices)
                 if(verif)
@@ -182,7 +186,7 @@ int main(int argc, const char *argv[])
 
         case 1: /* Matrix-vector multiply */
             {
-                printf("Performing matrix-vector multiply operation\n");
+                //printf("Performing matrix-vector multiply operation\n");
                 double *matA, *vecB, *vecC1,*vecC2;
 
                 // Allocate memory
@@ -196,7 +200,7 @@ int main(int argc, const char *argv[])
                 randInitialize(N,vecB);
 
                 clock_t tic, toc;
-                double tm;
+                double tm, tn, to;
 
                 if(execNaive) {
                   // Perform naive matA x vecB = vecC1
@@ -204,7 +208,8 @@ int main(int argc, const char *argv[])
                   matVecMult(N,matA,vecB,vecC1);
                   toc = clock();
                   tm = (double)(toc - tic) / CLOCKS_PER_SEC;
-                  printf("Elapsed time for naive mat-vec mult.: %f seconds\n",tm);
+                  tn = tm;
+                  //printf("Elapsed time for naive mat-vec mult.: %f seconds\n",tm);
                 }
 
                 if(execOPT) {
@@ -213,8 +218,11 @@ int main(int argc, const char *argv[])
                   matVecMult_opt(N,matA,vecB,vecC2);
                   toc = clock();
                   tm = (double)(toc - tic) / CLOCKS_PER_SEC;
-                  printf("Elapsed time for optimized mat-vec mult.: %f seconds\n",tm);
+                  to = tm;
+                  //printf("Elapsed time for optimized mat-vec mult.: %f seconds\n",tm);
                 }
+
+                printf("%i %f %f \n",N,tn,to);
 
                 // Verify results
                 if(verif)
