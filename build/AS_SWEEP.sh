@@ -17,7 +17,8 @@ echo "associativity Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw d1readMR d1writeMR" >
 # For each cache simulation 
 for (( bytes = 1; bytes<=$largest; bytes+=1 )) do
 	cgoutfile="./cgout/d1-a-$bytes"
-	valgrind --tool=cachegrind --I1=32768,8,64 --D1=32768,$bytes,64  --LL=6291456,24,64 --cachegrind-out-file=$cgoutfile ./ecse425proj -N 200 -operation 1 
+	linesize=$(($bytes*8))
+	valgrind --tool=cachegrind --I1=32768,8,64 --D1=32768,$bytes,$linesize  --LL=6291456,24,64 --cachegrind-out-file=$cgoutfile ./ecse425proj -N 200 -operation 1 
 
 	echo "D1 Cache Size = $bytes, outfile = $cgoutfile"
 	# Get the start and end lines to sum
@@ -72,7 +73,8 @@ echo "associativity Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw llreadMR llwriteMR" >
 # For each cache simulation 
 for (( bytes = 1; bytes<=$largest; bytes+=1 )) do
 	cgoutfile="./cgout/dl-a-$bytes"
-	valgrind --tool=cachegrind --I1=32768,8,64 --D1=32768,8,64 --LL=6291456,$bytes,64  --cachegrind-out-file=$cgoutfile ./ecse425proj -N 200 -operation 1 
+	linesize=$(($bytes*64/24))
+	valgrind --tool=cachegrind --I1=32768,8,64 --D1=32768,8,64 --LL=6291456,$bytes,$linesize  --cachegrind-out-file=$cgoutfile ./ecse425proj -N 200 -operation 1 
 
 	echo "LL Cache Size = $bytes, outfile = $cgoutfile"
 	# Get the start and end lines to sum

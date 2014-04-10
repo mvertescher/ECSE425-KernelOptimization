@@ -48,6 +48,7 @@ for (( bytes = 512; bytes<=$largestcache; bytes*=2 )) do
 	d1readMR=$(bc <<< "scale = 10; 100*${sums[5]}/${sums[4]} ")
 	d1writeMR=$(bc <<< "scale = 10; 100*${sums[8]}/${sums[7]} ")
 
+
 	echo "Printing to file: "
 	echo "$bytes ${sums[1]} ${sums[2]} ${sums[3]} ${sums[4]} ${sums[5]} ${sums[6]} ${sums[7]} ${sums[8]} ${sums[9]} $d1readMR $d1writeMR"
 	echo "$bytes ${sums[1]} ${sums[2]} ${sums[3]} ${sums[4]} ${sums[5]} ${sums[6]} ${sums[7]} ${sums[8]} ${sums[9]} $d1readMR $d1writeMR" >> $datfile
@@ -103,6 +104,7 @@ for (( bytes = 1536; bytes<=$largestcache; bytes*=2 )) do
 	llreadMR=$(bc <<< "scale = 10; 100*${sums[6]}/${sums[4]} ")
 	llwriteMR=$(bc <<< "scale = 10; 100*${sums[9]}/${sums[7]} ")
 
+
 	echo "Printing to file: "
 	echo "$bytes ${sums[1]} ${sums[2]} ${sums[3]} ${sums[4]} ${sums[5]} ${sums[6]} ${sums[7]} ${sums[8]} ${sums[9]} $llreadMR $llwriteMR"
 	echo "$bytes ${sums[1]} ${sums[2]} ${sums[3]} ${sums[4]} ${sums[5]} ${sums[6]} ${sums[7]} ${sums[8]} ${sums[9]} $llreadMR $llwriteMR" >> $datfile
@@ -155,6 +157,7 @@ for (( bytes = 512; bytes<=$largestcache; bytes*=2 )) do
 	done 
 
 	i1readMR=$(bc <<< "scale = 10; 100*${sums[2]}/${sums[1]} ")
+
 
 	echo "Printing to file: "
 	echo "$bytes ${sums[1]} ${sums[2]} ${sums[3]} ${sums[4]} ${sums[5]} ${sums[6]} ${sums[7]} ${sums[8]} ${sums[9]} $i1readMR"
